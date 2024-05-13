@@ -4,8 +4,19 @@ const hubsRouter = require('./hubs/hubs-router.js');
 
 const server = express();
 
+function customMorgan(req, res, next) {
+  console.log(`you made a ${req.method} request`);
+  next();
+}
+
+function shortCircuit(req, res, next) {
+  res.json('the request was short circuited!');
+}
+
 server.use(express.json());
 server.use(morgan('dev'));
+server.use(customMorgan);
+server.use(shortCircuit);
 
 server.use('/api/hubs', hubsRouter);
 
