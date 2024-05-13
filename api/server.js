@@ -5,6 +5,7 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
+server.use(morgan('dev'));
 
 server.use('/api/hubs', hubsRouter);
 
